@@ -14,7 +14,7 @@ app.all('*', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");    
     res.header("Access-Control-Allow-Methods", "GET, PUT, PATCH, POST, DELETE");
     res.header("Access-Control-Allow-Headers", req.header('access-control-request-headers'));
-    res.header("Authorization", req.header('Authorization'));
+    res.header("Authorization", req.header('authorization'));
 
     if (req.method === 'OPTIONS') {
         // CORS Preflight
@@ -35,7 +35,8 @@ app.all('*', function (req, res, next) {
         if(req.header('Content-Type')) headers['Content-Type'] = req.header('Content-Type');        
         if(req.header('webapiauthticket')) headers['WebApiAuthTicket'] = req.header('webapiauthticket');
         if(req.header('accept')) headers['Accept'] = req.header('accept');        
-        if(req.header('content-type')) headers['Content-Type'] = req.header('content-type');        
+        if(req.header('content-type')) headers['Content-Type'] = req.header('content-type');
+        if(req.header('authorization')) headers['Content-Type'] = req.header('authorization'); 
         request({ url: targetURL + req.url, method: req.method, json: req.body, headers: headers},
             function (error, response, body) {
                 if (error) {
